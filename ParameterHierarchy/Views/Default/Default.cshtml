@@ -1,0 +1,47 @@
+﻿@using ParameterHierarchy;
+@model Model1
+@addTagHelper *, ParameterHierarchy
+
+    <dl>
+        <dt>Property1 values</dt>
+        <dd>
+            @if (Model.Parameters.Property1.Any())
+            {
+                <ul>
+                    @foreach (var item in Model.Parameters.Property1)
+                    {
+                        <li>
+                            @item
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>No values</span>
+            }
+        </dd>
+        <dt>Replicate Property1</dt>
+        <dd>
+            <a parameters="Model.Parameters">@string.Join(", ", Model.Parameters.Property1)</a>
+        </dd>
+        <dt>Add to Property1</dt>
+        <dd>
+            @{ Model.Parameters.Property1.Add(555);}
+            <a parameters="Model.Parameters">+555</a>
+        </dd>
+        <dt>Overwrite Property1</dt>
+        <dd>
+            @{ Model.Parameters.Property1 = new[] { 1, 2, 3 };}
+            <a parameters="Model.Parameters">1, 2, 3</a>
+        </dd>
+        <dt>Clear Property1</dt>
+        <dd>
+            @{ Model.Parameters.Property1.Clear();}
+            <a parameters="Model.Parameters">Empty</a>
+        </dd>
+        <dt>New Property1</dt>
+        <dd>
+            <a parameters="new Parameters1 { Property1 = new[] { 9, 8, 7 } }">9, 8, 7</a>
+        </dd>
+    </dl>
